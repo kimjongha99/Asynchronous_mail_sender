@@ -3,10 +3,4 @@ spring:
     name: mail_sender
 
   mail:
-    # Gmail? ???? ??
-
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+ 

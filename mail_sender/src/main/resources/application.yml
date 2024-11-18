@@ -3,4 +3,5 @@ spring:
     name: mail_sender
 
   mail:
- 
+
+            enable: true

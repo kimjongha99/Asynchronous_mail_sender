@@ -1,5 +1,7 @@
-package com.example.mail_sender;
+package com.example.mail_sender.domains.mail;
 
+import com.example.mail_sender.domains.mail.services.EmailService;
+import com.example.mail_sender.domains.mail.dto.request.EmailRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

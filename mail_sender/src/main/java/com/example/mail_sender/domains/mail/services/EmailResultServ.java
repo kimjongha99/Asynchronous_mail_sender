@@ -11,21 +11,12 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-class EmailResultServ {
-    protected CompletableFuture<List<EmailResult>> processResults(List<EmailResult> results) {
-        logResults(results);
-        return CompletableFuture.completedFuture(results);
-    }
-
-    private void logResults(List<EmailResult> results) {
-        long successCount = results.stream().filter(EmailResult::isSuccess).count();
-        long failureCount = results.size() - successCount;
-
-        log.info("Email sending completed. Success: {}, Failure: {}", successCount, failureCount);
-
-        results.stream()
-                .filter(result -> !result.isSuccess())
-                .forEach(result -> log.error("Failed email: {} - Reason: {}",
-                        result.getEmail(), result.getMessage()));
+public class EmailResultServ {
+    // List<EmailResult>를 받는 대신 CompletableFuture<List<EmailResult>>를 받도록 수정
+    public CompletableFuture<List<EmailResult>> processResults(CompletableFuture<List<EmailResult>> results) {
+        return results.thenApply(emailResults -> {
+            // 결과 처리 로직
+            return emailResults;
+        });
     }
 }

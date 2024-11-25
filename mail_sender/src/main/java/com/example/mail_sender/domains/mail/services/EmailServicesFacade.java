@@ -24,10 +24,8 @@ public class EmailServicesFacade {
         // 이메일 유효성 검증
         emailValidateServ.validateEmailRequests(requests);
 
-        // 비동기 이메일 발송
-        List<EmailResult> results = emailSendServ.sendEmails(requests);
-
-        // 결과 처리 및 반환
-        return emailResultServ.processResults(results);
+        // 비동기 이메일 발송 및 결과 처리
+        CompletableFuture<List<EmailResult>> emailResults = emailSendServ.sendEmails(requests);
+        return emailResultServ.processResults(emailResults);
     }
 }

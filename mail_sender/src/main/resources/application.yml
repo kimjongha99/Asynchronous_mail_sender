@@ -1,5 +1,0 @@
-spring:
-  profiles:
-    active: dev  # 기본 활성 프로파일
-  application:
-    name: mail_sender

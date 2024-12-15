@@ -1,13 +1,13 @@
-package com.example.mail_sender;
+package com.example.mail_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MailSenderApplication {
+public class MailApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MailSenderApplication.class, args);
+        SpringApplication.run(MailApiApplication.class, args);
     }
 
 }

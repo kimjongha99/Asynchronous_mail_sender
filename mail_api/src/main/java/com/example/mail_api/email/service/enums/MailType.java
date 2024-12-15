@@ -1,5 +1,7 @@
 package com.example.mail_api.email.service.enums;
 
+import com.example.mail_api.commons.exceptions.CustomException;
+import com.example.mail_api.commons.exceptions.ErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -11,4 +13,10 @@ public enum MailType {
     WITHDRAWAL("회원탈퇴");
 
     private final String description;
+
+    public void validateTemplateParams(String[] params) {
+        if (params == null || params.length == 0) {
+            throw new CustomException(ErrorCode.MAIL_TEMPLATE_PARAMS_REQUIRED);
+        }
+    }
 }

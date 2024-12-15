@@ -34,10 +34,9 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
-
-    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-
+    // Swagger UI for Spring Boot 3
+    // swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
 
 }
 

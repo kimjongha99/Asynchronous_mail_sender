@@ -1,14 +1,12 @@
 package com.example.mail_api.commons.exceptions;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -44,5 +42,26 @@ public class GlobalExceptionHandler {
                 .status(errorCode.getHttpStatus())
                 .body(new ExceptionResponse(errorCode));
     }
+
+    // Validation 예외 처리 추가
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ExceptionResponse> handleValidationException(
+            MethodArgumentNotValidException e) {
+        String message = e.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(FieldError::getDefaultMessage)
+                .findFirst()
+                .orElse("잘못된 요청입니다");
+
+        log.error("Validation error: {}", message);
+
+        ErrorCode errorCode = ErrorCode.INVALID_EMAIL_FORMAT;
+        return ResponseEntity
+                .status(errorCode.getHttpStatus())
+                .body(new ExceptionResponse(errorCode));
+    }
+
+
 }
 
